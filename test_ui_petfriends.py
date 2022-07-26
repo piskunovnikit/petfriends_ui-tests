@@ -7,15 +7,15 @@ from selenium.webdriver.support import expected_conditions as EC
 driver = webdriver.Chrome('C:/chrome/chromedriver.exe')
 import time
 import pytest
-
+from link import email,password
 # подготавливаем тесты: авторизуемся, заходим на страницу с моими питомцами
 
 def testing_preparation():
 
     # driver.implicitly_wait(5)
     driver.get('https://petfriends.skillfactory.ru/login')
-    WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.ID, "email"))).send_keys('lomnik1995@yandex.ru')
-    WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.ID, "pass"))).send_keys('qazwsxedc')
+    WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.ID, "email"))).send_keys(email)
+    WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.ID, "pass"))).send_keys(password)
     WebDriverWait(driver, 3).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[type="submit"]'))).click()
     driver.get('https://petfriends.skillfactory.ru/my_pets')
     WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.LINK_TEXT, 'Мои питомцы'))).click()

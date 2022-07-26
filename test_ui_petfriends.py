@@ -12,7 +12,7 @@ from link import email,password
 
 def testing_preparation():
 
-    # driver.implicitly_wait(5)
+    driver.implicitly_wait(5)
     driver.get('https://petfriends.skillfactory.ru/login')
     WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.ID, "email"))).send_keys(email)
     WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.ID, "pass"))).send_keys(password)
@@ -23,6 +23,7 @@ def testing_preparation():
 #     # driver.quit()
 
 def test_check_count_pets():
+    driver.implicitly_wait(10)
     driver.get('https://petfriends.skillfactory.ru/my_pets')
     WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//tbody")))
    # Проверяем, что на странице "Мои питомцы" присутствуют все питомцы
@@ -59,8 +60,7 @@ def test_pets_list_have_photo():
 
 
 def test_all_pets_have_name_age_and_type():
-    info_of_my_pets = driver.find_elements(by=By.TAG_NAME, value='div td')
-    # info_of_my_pets = WebDriverWait(driver, 5).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, 'div td')))
+    info_of_my_pets = WebDriverWait(driver, 5).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, 'div td')))
     # получаем имена, типы и возрасты питомцев
     names = info_of_my_pets[::4]
     types = info_of_my_pets[1::4]
